@@ -31,12 +31,12 @@ public class TestingInputSystem : MonoBehaviour
     private void Move()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        //float verticalInput = Input.GetAxis("Vertical");
+        float verticalInput = Input.GetAxis("Vertical");
 
-        /*if ((transform.position.x + verticalInput > 4.50f || transform.position.x + verticalInput < -4.50f))
+        if ((transform.position.x + verticalInput > 4.50f || transform.position.x + verticalInput < -4.50f))
         {
             verticalInput = 0;
-        }*/
+        }
 
         if ((transform.position.z - horizontalInput < -4.45f || transform.position.z - horizontalInput > 3.65f))
         {
@@ -44,7 +44,7 @@ public class TestingInputSystem : MonoBehaviour
         }
 
 
-        Vector3 movement = new Vector3(0f, 0f, -horizontalInput) * moveSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(verticalInput, 0f, -horizontalInput) * moveSpeed * Time.deltaTime;
         characterRigidbody.MovePosition(transform.position + movement);
         //characterRigidbody.MovePosition(Vector3.Lerp(transform.position, transform.position + movement, 1));
 
@@ -52,6 +52,7 @@ public class TestingInputSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("trigger");
         canJump = true;
     }
 }
